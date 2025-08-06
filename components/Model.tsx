@@ -23,13 +23,18 @@ useEffect(() => {
 }, [actions])
 
 
-    useFrame(() => {
-      if (!actions) return
-      Object.values(actions).forEach((action) => {
-        const duration = action.getClip().duration
-        action.time = (duration * scroll.offset) / 4
-      })
-    })
+useFrame(() => {
+  if (!actions) return
+
+  Object.values(actions).forEach((action) => {
+    if (action) {
+      const duration = action.getClip().duration
+      action.time = (duration * scroll.offset) / 4
+    }
+  })
+})
+
+
 
     return (
       <>
