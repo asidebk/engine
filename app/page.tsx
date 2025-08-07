@@ -11,7 +11,7 @@ export default function HomePage() {
         alt="Logo"
         className="absolute top-4 left-4 w-64 h-auto z-10"
       />
-
+    
       {/* 3D Scene */}
       <Scene />
     </div>
