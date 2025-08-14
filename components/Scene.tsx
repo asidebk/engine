@@ -1,27 +1,25 @@
 "use client"
-import { Canvas } from "@react-three/fiber"
-import { Suspense } from "react"
-import { ScrollControls, Scroll } from "@react-three/drei"
+
+import { Canvas, useThree } from "@react-three/fiber"
 import Model from "./Model"
+import { Suspense } from "react"
+import { useProgress, Html, ScrollControls } from "@react-three/drei"
+
+function Loader() {
+  const { progress, active } = useProgress()
+
+  return <Html center>{progress.toFixed(1)} % loaded</Html>
+}
 
 export default function Scene() {
   return (
-    <Canvas style={{ height: "100vh", width: "100vw" }}>
-      {/* pages=4 makes the scroll area 4x viewport height */}
-      <ScrollControls pages={4} damping={0.1}>
-        {/* 3D content */}
-        <Suspense fallback={null}>
+    <Canvas gl={{ antialias: true }} dpr={[1, 1.5]} className="relative h-svh">
+      <directionalLight position={[-5, -5, 5]} intensity={4} />
+      <Suspense fallback={<Loader />}>
+        <ScrollControls damping={0.5} pages={3}>
           <Model />
-        </Suspense>
-
-        {/* HTML overlay content */}
-        <Scroll html>
-          <section style={{ height: "100vh" }} />
-          <section style={{ height: "100vh" }} />
-          <section style={{ height: "100vh" }} />
-          <section style={{ height: "100vh" }} />
-        </Scroll>
-      </ScrollControls>
+        </ScrollControls>
+      </Suspense>
     </Canvas>
   )
 }
