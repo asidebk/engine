@@ -78,7 +78,7 @@ export default function Model() {
       <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
       <directionalLight position={[-5, 5, -5]} intensity={0.5} />
       <pointLight position={[0, 5, 0]} intensity={0.3} />
-      <Environment preset="sunset" />
+      <Environment preset="city" />
     </>
   )
 }
